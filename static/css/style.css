@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5fff5;
+    color: #333;
+}
+
+/* Navigation */
+
+header {
+    background-color: #ffffff;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px #ddd;
+}
+
+header h2 {
+    color: #228b22;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #228b22;
+}
+
+/* Buttons */
+
+button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 5px;
+}
+
+.login-btn {
+    background-color: white;
+    border: 1px solid #228b22;
+    color: #228b22;
+}
+
+.register-btn,
+.donate-btn {
+    background-color: #228b22;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/* Home section */
+
+.hero {
+    text-align: center;
+    padding: 110px 20px;
+    background-color: #e8f5e9;
+}
+
+.hero h1 {
+    color: #176b2c;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    color: #388e3c;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* About section */
+
+.about {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.about h2 {
+    color: #228b22;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+/* Footer */
+
+footer {
+    background-color: #176b2c;
+    color: white;
+    text-align: center;
+    padding: 22px;
+    margin-top: 30px;
+}

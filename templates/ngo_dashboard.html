@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NGO Dashboard - FoodShare</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #218838;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 5px solid #218838;
+        }
+
+        h2 {
+            color: #218838;
+        }
+
+        .donation-card, .history-card {
+            background: #f9fff9;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 7px;
+            border-left: 5px solid #218838;
+        }
+
+        .request-btn, .logout-btn {
+            background: #218838;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .request-btn:hover, .logout-btn:hover {
+            background: #176b2c;
+        }
+
+        .message {
+            color: #218838;
+            font-weight: bold;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #d68910;
+        }
+
+        .approved {
+            color: #218838;
+        }
+
+        .rejected {
+            color: #c0392b;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Welcome, {{ name }}!</h1>
+    <p>FoodShare - NGO Dashboard</p>
+    <p>Find and request available food donations</p>
+</header>
+
+<div class="container">
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+
+    <!-- AVAILABLE FOOD DONATIONS -->
+    <div class="card">
+
+        <h2>Available Food Donations</h2>
+
+        {% if donations %}
+
+            {% for donation in donations %}
+
+                <div class="donation-card">
+
+                    <h3>{{ donation.food_name }}</h3>
+
+                    <p>
+                        <strong>Donor:</strong>
+                        {{ donation.donor_name }}
+                    </p>
+
+                    <p>
+                        <strong>Quantity:</strong>
+                        {{ donation.quantity }} meals
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        {{ donation.location }}
+                    </p>
+
+                    <p>
+                        <strong>Pickup Time:</strong>
+                        {{ donation.pickup_time }}
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong>
+                        {{ donation.description or "No description provided" }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ donation.status }}
+                    </p>
+
+                    <form
+                        action="{{ url_for('request_donation', donation_id=donation.id) }}"
+                        method="POST">
+
+                        <button type="submit" class="request-btn">
+                            Request Food
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No food donations are currently available.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- NGO REQUEST HISTORY -->
+    <div class="card">
+
+        <h2>My Request History</h2>
+
+        {% if request_history %}
+
+            {% for req in request_history %}
+
+                <div class="history-card">
+
+                    <h3>{{ req.food_name }}</h3>
+
+                    <p>
+                        <strong>Donor:</strong>
+                        {{ req.donor_name }}
+                    </p>
+
+                    <p>
+                        <strong>Quantity:</strong>
+                        {{ req.quantity }} meals
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        {{ req.location }}
+                    </p>
+
+                    <p>
+                        <strong>Pickup Time:</strong>
+                        {{ req.pickup_time }}
+                    </p>
+
+                    <p class="status">
+                        <strong>Request Status:</strong>
+
+                        {% if req.request_status == "Pending" %}
+                            <span class="pending">Pending</span>
+
+                        {% elif req.request_status == "Approved" %}
+                            <span class="approved">Approved</span>
+
+                        {% elif req.request_status == "Rejected" %}
+                            <span class="rejected">Rejected</span>
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>You have not submitted any food requests yet.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- LOGOUT -->
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+        Logout
+    </a>
+
+</div>
+
+</body>
+</html>

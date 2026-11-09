@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Food Waste Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8f5;
+            color: #333;
+        }
+
+        nav {
+            background: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: #218838;
+            font-size: 27px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #218838;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #218838;
+            color: white !important;
+            padding: 12px 22px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #176b2c;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 110px 20px;
+            background: #eef7ee;
+        }
+
+        .hero h1 {
+            color: #218838;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            color: #348b45;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .about {
+            text-align: center;
+            padding: 65px 20px;
+            background: white;
+        }
+
+        .about h2 {
+            color: #218838;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #218838;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+
+        <a href="{{ url_for('home') }}" class="logo">
+            FoodShare
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#contact">Contact</a>
+
+            <a href="{{ url_for('login') }}">Login</a>
+
+            <a href="{{ url_for('register') }}" class="btn">
+                Register
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Home Section -->
+    <section class="hero">
+
+        <h1>Food Waste Management System</h1>
+
+        <h2>Share Food, Spread Happiness!</h2>
+
+        <p>
+            Don't waste food. Donate surplus food and
+            help people in need.
+        </p>
+
+        <a href="{{ url_for('login') }}" class="btn">
+            Donate Food
+        </a>
+
+    </section>
+
+
+    <!-- About Section -->
+    <section class="about" id="about">
+
+        <h2>About Our Project</h2>
+
+        <p>
+            Our platform connects food donors with NGOs
+            to reduce food waste and help needy people.
+
+            Restaurants, hotels, event organizers and
+            individuals can donate surplus food.
+
+            NGOs can view available food donations and
+            request food for people in need.
+
+            Our main aim is to reduce food wastage
+            and spread happiness.
+        </p>
+
+    </section>
+
+
+    <!-- Contact Section -->
+    <footer id="contact">
+
+        <h2>Contact Us</h2>
+
+        <p>Food Waste Management System</p>
+
+        <p>Share Food, Spread Happiness!</p>
+
+        <p>
+            © 2026 FoodShare. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>

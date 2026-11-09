@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard - FoodShare</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f4;
+            margin: 0;
+        }
+
+        header {
+            background: #218838;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #218838;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button, .logout-btn {
+            background: #218838;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .reject-btn {
+            background: #c0392b;
+        }
+
+        .donation-item, .request-item {
+            border-left: 5px solid #218838;
+            background: #f9fff9;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .message {
+            color: #218838;
+            font-weight: bold;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Welcome, {{ name }}!</h1>
+    <p>FoodShare - Donor Dashboard</p>
+    <p>Share Food, Spread Happiness!</p>
+</header>
+
+<div class="container">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="message">{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+
+    <!-- Add Food Donation -->
+    <div class="card">
+
+        <h2>Donate Surplus Food</h2>
+
+        <form action="{{ url_for('add_donation') }}" method="POST">
+
+            <label>Food Name:</label>
+            <input type="text" name="food_name"
+                   placeholder="Enter food name" required>
+
+            <label>Quantity (Meals):</label>
+            <input type="number" name="quantity"
+                   min="1" placeholder="Enter quantity" required>
+
+            <label>Pickup Location:</label>
+            <input type="text" name="location"
+                   placeholder="Enter pickup location" required>
+
+            <label>Pickup Date and Time:</label>
+            <input type="datetime-local" name="pickup_time" required>
+
+            <label>Food Description:</label>
+            <textarea name="description"
+                      placeholder="Enter food description"></textarea>
+
+            <button type="submit">Submit Donation</button>
+
+        </form>
+
+    </div>
+
+
+    <!-- My Donations -->
+    <div class="card">
+
+        <h2>My Donations</h2>
+
+        {% if donations %}
+
+            {% for donation in donations %}
+
+                <div class="donation-item">
+
+                    <h3>{{ donation.food_name }}</h3>
+
+                    <p><strong>Quantity:</strong>
+                        {{ donation.quantity }} meals
+                    </p>
+
+                    <p><strong>Location:</strong>
+                        {{ donation.location }}
+                    </p>
+
+                    <p><strong>Pickup Time:</strong>
+                        {{ donation.pickup_time }}
+                    </p>
+
+                    <p><strong>Description:</strong>
+                        {{ donation.description }}
+                    </p>
+
+                    <p class="status">
+                        <strong>Status:</strong> {{ donation.status }}
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No donations submitted yet.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- NGO Requests -->
+    <div class="card">
+
+        <h2>NGO Food Requests</h2>
+
+        {% if requests %}
+
+            {% for req in requests %}
+
+                <div class="request-item">
+
+                    <h3>{{ req.food_name }}</h3>
+
+                    <p><strong>NGO Name:</strong>
+                        {{ req.ngo_name }}
+                    </p>
+
+                    <p><strong>Food Quantity:</strong>
+                        {{ req.quantity }} meals
+                    </p>
+
+                    <p><strong>Request Status:</strong>
+                        {{ req.request_status }}
+                    </p>
+
+                    {% if req.request_status == 'Pending' %}
+
+                        <form action="{{ url_for('update_request',
+                                      request_id=req.request_id,
+                                      action='approve') }}"
+                              method="POST">
+
+                            <button type="submit">
+                                Approve Request
+                            </button>
+
+                        </form>
+
+                        <form action="{{ url_for('update_request',
+                                      request_id=req.request_id,
+                                      action='reject') }}"
+                              method="POST">
+
+                            <button type="submit" class="reject-btn">
+                                Reject Request
+                            </button>
+
+                        </form>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No NGO requests received yet.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <a href="{{ url_for('logout') }}" class="logout-btn">
+        Logout
+    </a>
+
+</div>
+
+</body>
+</html>

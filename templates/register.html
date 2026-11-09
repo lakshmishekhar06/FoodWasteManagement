@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - FoodShare</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0fff0;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background-color: white;
+            width: 350px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h1 {
+            color: #228b22;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #228b22;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #145214;
+        }
+
+        .message {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Create Your Account</h1>
+
+        <!-- Display success or error messages -->
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <!-- Registration Form -->
+        <form action="/register" method="POST">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your full name"
+                required
+            >
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+            <select name="role" required>
+                <option value="">Select Your Role</option>
+                <option value="Donor">Donor</option>
+                <option value="NGO">NGO</option>
+            </select>
+
+            <br><br>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+
+        <a href="/">Back to Home</a>
+
+    </div>
+
+</body>
+</html>
