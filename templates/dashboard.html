@@ -2,21 +2,170 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>FoodShare Dashboard</title>
+
+    <!-- CSS File -->
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+    <style>
+        .welcome-section {
+            background: linear-gradient(135deg, #14532d, #36a367);
+            color: white;
+            padding: 45px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            color: #e7f8e9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e7f0e7;
+        }
+
+        .dashboard-card h3 {
+            color: #168044;
+            margin-bottom: 12px;
+        }
+
+        .dashboard-card p {
+            color: #555;
+        }
+
+        .dashboard-icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .logout-link {
+            display: inline-block;
+            background: #ffffff;
+            color: #168044;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .logout-link:hover {
+            background: #e7f8e9;
+        }
+
+        .dashboard-title {
+            color: #14532d;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-footer {
+            text-align: center;
+            margin-top: 45px;
+            color: #777;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>Welcome to FoodShare!</h1>
+    <!-- Navigation -->
+    <header>
+        <h2>🌱 FoodShare</h2>
 
-    <h2>Hello, {{ name }}!</h2>
+        <nav>
+            <a href="/">Home</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
 
-    <h3>Your Role: {{ role }}</h3>
+    <!-- Main Dashboard -->
+    <main class="dashboard-container">
 
-    <p>You have successfully logged in.</p>
+        <!-- Welcome Section -->
+        <section class="welcome-section">
 
-    <a href="/logout">
-        <button>Logout</button>
-    </a>
+            <h1>Welcome to FoodShare! 🌿</h1>
+
+            <h2>Hello, {{ name }}!</h2>
+
+            <p>
+                Together we can reduce food waste
+                and spread happiness.
+            </p>
+
+            <a href="/logout" class="logout-link">
+                Logout →
+            </a>
+
+        </section>
+
+        <!-- Dashboard Cards -->
+        <section id="dashboard">
+
+            <h2 class="dashboard-title">
+                Your Dashboard
+            </h2>
+
+            <div class="dashboard-grid">
+
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">👤</div>
+                    <h3>Welcome User</h3>
+                    <p>{{ name }}</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">🎭</div>
+                    <h3>Your Role</h3>
+                    <p>{{ role }}</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">✅</div>
+                    <h3>Login Status</h3>
+                    <p>You have successfully logged in.</p>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="dashboard-icon">🌍</div>
+                    <h3>Our Mission</h3>
+                    <p>Save food, reduce waste and help people in need.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>© 2026 FoodShare | Share Food, Spread Happiness ❤️</p>
+        </footer>
+
+    </main>
 
 </body>
 </html>

@@ -1,217 +1,777 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Food Waste Management System</title>
+<title>FoodShare | Share Food, Spread Happiness</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f8f5;
-            color: #333;
-        }
+<style>
 
-        nav {
-            background: white;
-            padding: 20px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+:root {
+    --blue: #315FB5;
+    --dark: #142B57;
+    --light: #EAF0FF;
+    --orange: #F2A044;
+    --white: #FFFFFF;
+    --text: #263956;
+    --muted: #8490A7;
+}
 
-        .logo {
-            color: #218838;
-            font-size: 27px;
-            font-weight: bold;
-            text-decoration: none;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
+body {
+    background: white;
+    color: var(--text);
+}
 
-        .nav-links a:hover {
-            color: #218838;
-        }
+/* NAVBAR */
 
-        .btn {
-            display: inline-block;
-            background: #218838;
-            color: white !important;
-            padding: 12px 22px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 7%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 18px #142B5710;
+}
 
-        .btn:hover {
-            background: #176b2c;
-        }
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--dark);
+    text-decoration: none;
+}
 
-        .hero {
-            text-align: center;
-            padding: 110px 20px;
-            background: #eef7ee;
-        }
+.logo span {
+    color: var(--blue);
+}
 
-        .hero h1 {
-            color: #218838;
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
 
-        .hero h2 {
-            color: #348b45;
-            margin-bottom: 15px;
-        }
+.nav-links a {
+    text-decoration: none;
+    color: #4C5872;
+    font-size: 14px;
+    font-weight: 600;
+}
 
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
+.nav-links a:hover {
+    color: var(--blue);
+}
 
-        .about {
-            text-align: center;
-            padding: 65px 20px;
-            background: white;
-        }
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--blue);
+    color: white !important;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
 
-        .about h2 {
-            color: #218838;
-            margin-bottom: 20px;
-        }
+.btn:hover {
+    background: var(--dark);
+    transform: translateY(-3px);
+}
 
-        .about p {
-            max-width: 750px;
-            margin: auto;
-            line-height: 1.7;
-        }
+/* HERO SECTION */
 
-        footer {
-            background: #218838;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+.hero {
+    min-height: 620px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 35px;
+    padding: 65px 7%;
+    background: linear-gradient(120deg, #142B57, #315FB5);
+    color: white;
+}
 
-        @media (max-width: 700px) {
-            nav {
-                flex-direction: column;
-                gap: 18px;
-            }
+.hero-content {
+    max-width: 650px;
+}
 
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
+.hero-tag {
+    display: inline-block;
+    padding: 9px 17px;
+    border-radius: 30px;
+    background: #ffffff20;
+    border: 1px solid #ffffff55;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
 
-            .hero h1 {
-                font-size: 30px;
-            }
-        }
-    </style>
+.hero h1 {
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #BFD0FF;
+}
+
+.hero p {
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+    color: #E8EDFA;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.hero .btn {
+    background: var(--orange);
+    color: var(--dark) !important;
+}
+
+.hero .btn:hover {
+    background: white;
+}
+
+.outline-btn {
+    background: transparent !important;
+    border: 1px solid white;
+    color: white !important;
+}
+
+/* FOOD IMAGE RIGHT SIDE */
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    max-width: 480px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 5px solid #ffffff30;
+    box-shadow: 0 20px 45px #07173555;
+    transition: .4s;
+}
+
+.hero-image img:hover {
+    transform: scale(1.03);
+}
+
+/* IMPACT SECTION */
+
+.impact-strip {
+    width: 88%;
+    margin: -35px auto 0;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.impact-item {
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 17px;
+    border: 1px solid #E4EAF5;
+    box-shadow: 0 10px 30px #142B5710;
+}
+
+.impact-item strong {
+    display: block;
+    color: var(--blue);
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.impact-item p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* COMMON SECTION */
+
+.section {
+    padding: 85px 7%;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 45px;
+}
+
+.eyebrow {
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    color: var(--dark);
+    font-size: 35px;
+    margin: 10px 0;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ABOUT SECTION */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.about-image img {
+    width: 100%;
+    height: 370px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 12px 30px #142B5718;
+}
+
+.about-content h2 {
+    color: var(--dark);
+    font-size: 32px;
+    line-height: 1.4;
+    margin: 12px 0 18px;
+}
+
+.about-content p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+    margin-bottom: 15px;
+}
+
+.feature-list {
+    display: grid;
+    gap: 13px;
+    margin-top: 20px;
+}
+
+.feature {
+    font-size: 14px;
+    font-weight: 600;
+    color: #485775;
+}
+
+.feature span {
+    color: var(--blue);
+    margin-right: 10px;
+}
+
+/* HOW IT WORKS */
+
+.how-section {
+    background: #F5F7FC;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.step-card {
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #E4EAF5;
+    transition: .3s;
+    box-shadow: 0 8px 25px #142B5708;
+}
+
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px #142B5715;
+}
+
+.step-icon {
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    background: var(--light);
+    border-radius: 15px;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.step-card h3 {
+    color: var(--dark);
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.step-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* CALL TO ACTION */
+
+.cta {
+    width: 86%;
+    margin: 75px auto;
+    padding: 60px 30px;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+    background: linear-gradient(120deg, #142B57, #315FB5);
+}
+
+.cta h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: #E0E8FF;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.cta .btn {
+    background: white;
+    color: var(--dark) !important;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 45px 7% 20px;
+    background: #101F45;
+    color: white;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 35px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+footer h2,
+footer h3 {
+    margin-bottom: 15px;
+}
+
+footer p,
+footer a {
+    color: #C7D1E8;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+footer a {
+    display: block;
+    text-decoration: none;
+    margin: 7px 0;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #ffffff25;
+    margin-top: 30px;
+    padding-top: 20px;
+    font-size: 12px;
+    color: #C7D1E8;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media(max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 13px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 50px 6%;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-image img {
+        height: 280px;
+    }
+
+    .impact-strip,
+    .steps,
+    .about-grid,
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .impact-strip {
+        margin-top: 25px;
+    }
+
+    .section {
+        padding: 60px 6%;
+    }
+
+    .about-image img {
+        height: 260px;
+    }
+
+    .cta {
+        width: 90%;
+        margin: 50px auto;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
+<!-- NAVIGATION BAR -->
 
-        <a href="{{ url_for('home') }}" class="logo">
-            FoodShare
+<nav class="navbar">
+
+    <a href="{{ url_for('home') }}" class="logo">
+        🍱 Food<span>Share</span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">Home</a>
+
+        <a href="#about">About</a>
+
+        <a href="#how-it-works">How It Works</a>
+
+        <a href="#contact">Contact</a>
+
+        <a href="{{ url_for('login') }}">Login</a>
+
+        <a href="{{ url_for('register') }}" class="btn">
+            Get Started →
         </a>
 
-        <div class="nav-links">
+    </div>
 
-            <a href="{{ url_for('home') }}">Home</a>
+</nav>
 
-            <a href="#about">About</a>
+<!-- HERO SECTION -->
 
-            <a href="#contact">Contact</a>
+<section class="hero">
 
-            <a href="{{ url_for('login') }}">Login</a>
+    <div class="hero-content">
 
-            <a href="{{ url_for('register') }}" class="btn">
-                Register
+        <div class="hero-tag">
+            🌍 Together, let's reduce food waste
+        </div>
+
+        <h1>
+            Good Food Deserves
+            <span>Another Chance.</span>
+        </h1>
+
+        <p>
+            Connect surplus food with people who need it.
+            FoodShare brings donors and NGOs together
+            to reduce food waste and make a meaningful difference.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="{{ url_for('login') }}" class="btn">
+                Donate Food ↗
+            </a>
+
+            <a href="#about" class="btn outline-btn">
+                Discover Our Mission
             </a>
 
         </div>
 
-    </nav>
+    </div>
 
+    <!-- FOOD IMAGE -->
 
-    <!-- Home Section -->
-    <section class="hero">
+    <div class="hero-image">
 
-        <h1>Food Waste Management System</h1>
+        <img
+            src="{{ url_for('static', filename='images/food.jpg') }}"
+            alt="Fresh food donation"
+        >
 
-        <h2>Share Food, Spread Happiness!</h2>
+    </div>
+
+</section>
+
+<!-- IMPACT SECTION -->
+
+<section class="impact-strip">
+
+    <div class="impact-item">
+        <strong>🤝 Community First</strong>
+        <p>Connecting donors with NGOs</p>
+    </div>
+
+    <div class="impact-item">
+        <strong>🥗 Less Food Waste</strong>
+        <p>Giving surplus food a purpose</p>
+    </div>
+
+    <div class="impact-item">
+        <strong>💙 Helping Hands</strong>
+        <p>Supporting people in need</p>
+    </div>
+
+</section>
+
+<!-- ABOUT SECTION -->
+
+<section class="section" id="about">
+
+    <div class="about-grid">
+
+        <div class="about-image">
+
+            <img
+                src="{{ url_for('static', filename='images/food.jpg') }}"
+                alt="Food donation"
+            >
+
+        </div>
+
+        <div class="about-content">
+
+            <div class="eyebrow">About FoodShare</div>
+
+            <h2>
+                Small Acts of Sharing Can Make a Big Difference.
+            </h2>
+
+            <p>
+                FoodShare is a food donation platform that connects
+                restaurants, hotels, event organizers and households
+                with NGOs.
+            </p>
+
+            <p>
+                Our mission is to reduce food waste and ensure that
+                surplus food reaches people who need it.
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature">
+                    <span>✓</span> Easy food donation process
+                </div>
+
+                <div class="feature">
+                    <span>✓</span> Direct connection with NGOs
+                </div>
+
+                <div class="feature">
+                    <span>✓</span> Reduce food waste
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section class="section how-section" id="how-it-works">
+
+    <div class="section-heading">
+
+        <div class="eyebrow">
+            Simple steps, meaningful impact
+        </div>
+
+        <h2>How FoodShare Works</h2>
 
         <p>
-            Don't waste food. Donate surplus food and
-            help people in need.
+            Three simple steps to make a difference in someone's life.
         </p>
 
-        <a href="{{ url_for('login') }}" class="btn">
-            Donate Food
-        </a>
+    </div>
 
-    </section>
+    <div class="steps">
 
+        <div class="step-card">
 
-    <!-- About Section -->
-    <section class="about" id="about">
+            <div class="step-icon">🍱</div>
 
-        <h2>About Our Project</h2>
+            <h3>01. Donate Food</h3>
 
-        <p>
-            Our platform connects food donors with NGOs
-            to reduce food waste and help needy people.
+            <p>
+                Donors add surplus food details, quantity,
+                pickup location and suitable pickup time.
+            </p>
 
-            Restaurants, hotels, event organizers and
-            individuals can donate surplus food.
+        </div>
 
-            NGOs can view available food donations and
-            request food for people in need.
+        <div class="step-card">
 
-            Our main aim is to reduce food wastage
-            and spread happiness.
-        </p>
+            <div class="step-icon">🤝</div>
 
-    </section>
+            <h3>02. NGO Requests</h3>
 
+            <p>
+                NGOs browse available food donations
+                and request the food they need.
+            </p>
 
-    <!-- Contact Section -->
-    <footer id="contact">
+        </div>
 
-        <h2>Contact Us</h2>
+        <div class="step-card">
 
-        <p>Food Waste Management System</p>
+            <div class="step-icon">❤️</div>
 
-        <p>Share Food, Spread Happiness!</p>
+            <h3>03. Help People</h3>
 
-        <p>
-            © 2026 FoodShare. All Rights Reserved.
-        </p>
+            <p>
+                Approved food donations reach people
+                who need support.
+            </p>
 
-    </footer>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CALL TO ACTION -->
+
+<section class="cta">
+
+    <h2>Be Part of the Change 💙</h2>
+
+    <p>
+        Join FoodShare and help turn surplus food
+        into support for someone in need.
+    </p>
+
+    <a href="{{ url_for('register') }}" class="btn">
+        Create Your Account →
+    </a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer id="contact">
+
+    <div class="footer-main">
+
+        <div>
+
+            <h2>🍱 FoodShare</h2>
+
+            <p>
+                Share Food, Spread Happiness!
+                Working together to reduce food waste
+                and support our communities.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Quick Links</h3>
+
+            <a href="{{ url_for('home') }}">Home</a>
+
+            <a href="#about">About Us</a>
+
+            <a href="#how-it-works">How It Works</a>
+
+        </div>
+
+        <div>
+
+            <h3>Get Started</h3>
+
+            <a href="{{ url_for('login') }}">Login</a>
+
+            <a href="{{ url_for('register') }}">Register</a>
+
+            <p>Food Waste Management System</p>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 FoodShare. All Rights Reserved. 💙
+    </div>
+
+</footer>
 
 </body>
 </html>

@@ -3,240 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard | FoodShare</title>
 
-    <title>NGO Dashboard - FoodShare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f4;
+        :root {
+            --blue: #315FB5;
+            --dark: #142B57;
+            --light: #EAF0FF;
+            --bg: #F4F6FC;
+            --text: #263956;
+            --muted: #8490A7;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        header {
-            background: #218838;
-            color: white;
-            text-align: center;
-            padding: 25px;
+        body {
+            background: var(--bg);
+            color: var(--text);
         }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: white;
+            padding: 17px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 18px #142B5710;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: var(--dark);
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .welcome {
+            color: #63718B;
+            font-size: 13px;
+        }
+
+        .logout {
+            background: #FFF0F0;
+            color: #D14343;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .logout:hover {
+            background: #FFE0E0;
+        }
+
+        /* MAIN */
 
         .container {
-            width: 85%;
-            margin: 30px auto;
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 5%;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-left: 5px solid #218838;
+        .page-heading {
+            margin-bottom: 30px;
         }
 
-        h2 {
-            color: #218838;
+        .page-heading h1 {
+            font-size: 29px;
+            color: var(--dark);
         }
 
-        .donation-card, .history-card {
-            background: #f9fff9;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 7px;
-            border-left: 5px solid #218838;
+        .page-heading p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 7px;
         }
 
-        .request-btn, .logout-btn {
-            background: #218838;
+        /* WELCOME BANNER */
+
+        .banner {
+            padding: 30px;
+            border-radius: 18px;
             color: white;
+            background: linear-gradient(120deg, #142B57, #315FB5);
+            margin-bottom: 35px;
+        }
+
+        .banner h2 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .banner p {
+            font-size: 13px;
+            color: #DCE6FF;
+        }
+
+        /* SECTION */
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 35px 0 20px;
+        }
+
+        .section-title h2 {
+            font-size: 21px;
+            color: var(--dark);
+        }
+
+        .section-title span {
+            background: var(--light);
+            color: var(--blue);
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* DONATION CARDS */
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .donation-card {
+            background: white;
+            padding: 23px;
+            border-radius: 17px;
+            border: 1px solid #E7EBF4;
+            box-shadow: 0 6px 20px #142B5708;
+            transition: .3s;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px #142B5715;
+        }
+
+        .food-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            background: var(--light);
+            border-radius: 13px;
+            font-size: 24px;
+            margin-bottom: 17px;
+        }
+
+        .donation-card h3 {
+            color: var(--dark);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .details {
+            display: grid;
+            gap: 9px;
+            margin: 15px 0;
+        }
+
+        .detail {
+            font-size: 12px;
+            color: #68758D;
+            overflow-wrap: anywhere;
+        }
+
+        .detail strong {
+            color: #344563;
+        }
+
+        .description {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 12px 0;
+        }
+
+        .request-btn {
+            width: 100%;
             border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
+            background: linear-gradient(100deg, #315FB5, #142B57);
+            color: white;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 12px;
+            transition: .3s;
         }
 
-        .request-btn:hover, .logout-btn:hover {
-            background: #176b2c;
+        .request-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px #315FB530;
         }
 
-        .message {
-            color: #218838;
-            font-weight: bold;
+        /* HISTORY TABLE */
+
+        .history-box {
+            background: white;
+            border-radius: 17px;
+            padding: 22px;
+            border: 1px solid #E7EBF4;
+            box-shadow: 0 6px 20px #142B5708;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            color: #63718B;
+            background: #F4F6FC;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #EDF0F6;
+            font-size: 12px;
+            color: #52617B;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
         }
 
         .status {
-            font-weight: bold;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--light);
+            color: var(--blue);
         }
 
-        .pending {
-            color: #d68910;
+        /* EMPTY STATE */
+
+        .empty {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            border: 1px dashed #C7D3E8;
+            color: var(--muted);
+            font-size: 14px;
         }
 
-        .approved {
-            color: #218838;
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
         }
 
-        .rejected {
-            color: #c0392b;
+        /* FLASH */
+
+        .flash {
+            background: #EAF0FF;
+            border: 1px solid #CAD8FA;
+            color: #244D99;
+            padding: 13px 17px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            color: #8490A7;
+            font-size: 12px;
+        }
+
+        @media(max-width: 900px) {
+            .donation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .welcome {
+                display: none;
+            }
+
+            .container {
+                padding: 25px 4%;
+            }
+
+            .donation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .banner {
+                padding: 23px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Welcome, {{ name }}!</h1>
-    <p>FoodShare - NGO Dashboard</p>
-    <p>Find and request available food donations</p>
-</header>
+    <!-- NAVBAR -->
 
-<div class="container">
+    <nav class="navbar">
+        <div class="logo">🍱 Food<span>Share</span></div>
 
-    <!-- FLASH MESSAGES -->
-    {% with messages = get_flashed_messages() %}
-        {% for message in messages %}
-            <p class="message">{{ message }}</p>
-        {% endfor %}
-    {% endwith %}
+        <div class="nav-right">
+            <span class="welcome">Welcome, {{ name }}</span>
+            <a href="{{ url_for('logout') }}" class="logout">
+                Logout ↗
+            </a>
+        </div>
+    </nav>
 
+    <main class="container">
 
-    <!-- AVAILABLE FOOD DONATIONS -->
-    <div class="card">
+        <!-- PAGE HEADING -->
 
-        <h2>Available Food Donations</h2>
+        <div class="page-heading">
+            <h1>NGO Dashboard</h1>
+            <p>Discover food donations and help people in need.</p>
+        </div>
+
+        <!-- WELCOME BANNER -->
+
+        <div class="banner">
+            <h2>Welcome to FoodShare! 💙</h2>
+            <p>
+                Explore available food donations, request food
+                and make a difference in your community.
+            </p>
+        </div>
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- AVAILABLE DONATIONS -->
+
+        <div class="section-title">
+            <h2>🍱 Available Food Donations</h2>
+            <span>Explore Donations</span>
+        </div>
 
         {% if donations %}
 
+        <div class="donation-grid">
+
             {% for donation in donations %}
 
-                <div class="donation-card">
+            <div class="donation-card">
 
-                    <h3>{{ donation.food_name }}</h3>
+                <div class="food-icon">🥗</div>
 
-                    <p>
-                        <strong>Donor:</strong>
+                <h3>{{ donation.food_name }}</h3>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <strong>👤 Donor:</strong>
                         {{ donation.donor_name }}
-                    </p>
+                    </div>
 
-                    <p>
-                        <strong>Quantity:</strong>
-                        {{ donation.quantity }} meals
-                    </p>
+                    <div class="detail">
+                        <strong>📦 Quantity:</strong>
+                        {{ donation.quantity }}
+                    </div>
 
-                    <p>
-                        <strong>Location:</strong>
+                    <div class="detail">
+                        <strong>📍 Location:</strong>
                         {{ donation.location }}
-                    </p>
+                    </div>
 
-                    <p>
-                        <strong>Pickup Time:</strong>
+                    <div class="detail">
+                        <strong>🕒 Pickup Time:</strong>
                         {{ donation.pickup_time }}
-                    </p>
-
-                    <p>
-                        <strong>Description:</strong>
-                        {{ donation.description or "No description provided" }}
-                    </p>
-
-                    <p>
-                        <strong>Status:</strong>
-                        {{ donation.status }}
-                    </p>
-
-                    <form
-                        action="{{ url_for('request_donation', donation_id=donation.id) }}"
-                        method="POST">
-
-                        <button type="submit" class="request-btn">
-                            Request Food
-                        </button>
-
-                    </form>
+                    </div>
 
                 </div>
 
+                <p class="description">
+                    {{ donation.description }}
+                </p>
+
+                <form method="POST"
+                      action="{{ url_for('request_donation', donation_id=donation.id) }}">
+
+                    <button type="submit" class="request-btn">
+                        Request Food →
+                    </button>
+
+                </form>
+
+            </div>
+
             {% endfor %}
+
+        </div>
 
         {% else %}
 
-            <p>No food donations are currently available.</p>
+        <div class="empty">
+            <div class="empty-icon">🍽️</div>
+            <h3>No Donations Available</h3>
+            <p>Currently, there are no food donations available.</p>
+        </div>
 
         {% endif %}
 
-    </div>
+        <!-- REQUEST HISTORY -->
 
-
-    <!-- NGO REQUEST HISTORY -->
-    <div class="card">
-
-        <h2>My Request History</h2>
+        <div class="section-title">
+            <h2>📋 My Request History</h2>
+            <span>Previous Requests</span>
+        </div>
 
         {% if request_history %}
 
-            {% for req in request_history %}
+        <div class="history-box">
 
-                <div class="history-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food Name</th>
+                        <th>Donor</th>
+                        <th>Quantity</th>
+                        <th>Location</th>
+                        <th>Pickup Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
 
-                    <h3>{{ req.food_name }}</h3>
+                <tbody>
 
-                    <p>
-                        <strong>Donor:</strong>
-                        {{ req.donor_name }}
-                    </p>
+                    {% for req in request_history %}
 
-                    <p>
-                        <strong>Quantity:</strong>
-                        {{ req.quantity }} meals
-                    </p>
+                    <tr>
+                        <td><strong>{{ req.food_name }}</strong></td>
+                        <td>{{ req.donor_name }}</td>
+                        <td>{{ req.quantity }}</td>
+                        <td>{{ req.location }}</td>
+                        <td>{{ req.pickup_time }}</td>
+                        <td>
+                            <span class="status">
+                                {{ req.request_status }}
+                            </span>
+                        </td>
+                    </tr>
 
-                    <p>
-                        <strong>Location:</strong>
-                        {{ req.location }}
-                    </p>
+                    {% endfor %}
 
-                    <p>
-                        <strong>Pickup Time:</strong>
-                        {{ req.pickup_time }}
-                    </p>
+                </tbody>
+            </table>
 
-                    <p class="status">
-                        <strong>Request Status:</strong>
-
-                        {% if req.request_status == "Pending" %}
-                            <span class="pending">Pending</span>
-
-                        {% elif req.request_status == "Approved" %}
-                            <span class="approved">Approved</span>
-
-                        {% elif req.request_status == "Rejected" %}
-                            <span class="rejected">Rejected</span>
-                        {% endif %}
-
-                    </p>
-
-                </div>
-
-            {% endfor %}
+        </div>
 
         {% else %}
 
-            <p>You have not submitted any food requests yet.</p>
+        <div class="empty">
+            <div class="empty-icon">📋</div>
+            <h3>No Request History</h3>
+            <p>Your food donation requests will appear here.</p>
+        </div>
 
         {% endif %}
 
-    </div>
+    </main>
 
-
-    <!-- LOGOUT -->
-    <a href="{{ url_for('logout') }}" class="logout-btn">
-        Logout
-    </a>
-
-</div>
+    <footer>
+        © 2026 FoodShare | Share Food, Spread Happiness 💙
+    </footer>
 
 </body>
 </html>

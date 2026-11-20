@@ -1,115 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | FoodShare</title>
 
-    <title>Register - FoodShare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0fff0;
-            text-align: center;
-            padding: 40px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #142B57, #315FB5, #829FE0);
         }
 
         .container {
-            background-color: white;
-            width: 350px;
-            margin: auto;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            width: 1000px;
+            max-width: 100%;
+            min-height: 650px;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px #07173555;
         }
 
-        h1 {
-            color: #228b22;
+        /* LEFT PANEL */
+
+        .left-panel {
+            padding: 55px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            background:
+                linear-gradient(145deg, #142B57E8, #315FB5CC),
+                url("{{ url_for('static', filename='images/food.jpg') }}")
+                center/cover no-repeat;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 800;
+            margin-bottom: 45px;
+        }
+
+        .logo span {
+            color: #BFD0FF;
+        }
+
+        .left-panel h1 {
+            font-size: 37px;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .left-panel p {
+            color: #E2E9FF;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .benefits {
+            margin-top: 35px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .benefit {
+            padding: 12px;
+            border-radius: 10px;
+            background: #ffffff20;
+            font-size: 13px;
+        }
+
+        /* RIGHT PANEL */
+
+        .right-panel {
+            padding: 40px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .heading {
+            margin-bottom: 22px;
+        }
+
+        .heading .icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .heading h2 {
+            color: #142B57;
+            font-size: 28px;
+        }
+
+        .heading p {
+            color: #8490A7;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .flash {
+            background: #FFF0F0;
+            color: #B83232;
+            border: 1px solid #F5CACA;
+            border-radius: 9px;
+            padding: 11px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #263956;
+            font-weight: 600;
+            margin-bottom: 7px;
         }
 
         input, select {
-            width: 90%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #DCE3F0;
+            border-radius: 10px;
+            background: #F9FAFE;
+            font-size: 13px;
+            outline: none;
+            transition: .3s;
         }
 
-        button {
-            background-color: #228b22;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
+        input:focus, select:focus {
+            border-color: #315FB5;
+            box-shadow: 0 0 0 3px #315FB51A;
+            background: white;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .role-card {
+            position: relative;
+        }
+
+        .role-card input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .role-card label {
+            display: block;
+            text-align: center;
+            border: 1px solid #DCE3F0;
+            border-radius: 12px;
+            padding: 15px 8px;
             cursor: pointer;
+            background: #F9FAFE;
+            transition: .3s;
         }
 
-        button:hover {
-            background-color: #145214;
+        .role-card label span {
+            display: block;
+            font-size: 25px;
+            margin-bottom: 5px;
         }
 
-        .message {
-            color: green;
-            font-weight: bold;
+        .role-card input:checked + label {
+            border: 2px solid #315FB5;
+            background: #EAF0FF;
+            color: #142B57;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #315FB5, #142B57);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            margin-top: 8px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px #315FB540;
+        }
+
+        .login-text {
+            text-align: center;
+            color: #7C879D;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .login-text a {
+            color: #315FB5;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        .back-home a {
+            color: #6E7D99;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        @media(max-width: 750px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-panel {
+                padding: 30px;
+                min-height: 260px;
+            }
+
+            .logo {
+                margin-bottom: 20px;
+            }
+
+            .left-panel h1 {
+                font-size: 28px;
+            }
+
+            .benefits {
+                margin-top: 20px;
+            }
+
+            .right-panel {
+                padding: 35px 25px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>Create Your Account</h1>
+    <!-- LEFT SIDE -->
 
-        <!-- Display success or error messages -->
+    <div class="left-panel">
+
+        <div class="logo">🍱 Food<span>Share</span></div>
+
+        <h1>Join Our Mission!</h1>
+
+        <p>
+            Become a part of our community.
+            Share surplus food, support NGOs and
+            help reduce food waste.
+        </p>
+
+        <div class="benefits">
+            <div class="benefit">💙 Make a positive impact</div>
+            <div class="benefit">🤝 Connect with NGOs</div>
+            <div class="benefit">🌍 Help reduce food waste</div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="right-panel">
+
+        <div class="heading">
+            <div class="icon">✨</div>
+            <h2>Create Account</h2>
+            <p>Register to get started with FoodShare.</p>
+        </div>
+
+        <!-- Flash Messages -->
+
         {% with messages = get_flashed_messages() %}
-            {% for message in messages %}
-                <p class="message">{{ message }}</p>
-            {% endfor %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
         {% endwith %}
 
-        <!-- Registration Form -->
-        <form action="/register" method="POST">
+        <form method="POST" action="/register">
 
-            <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                required
-            >
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                required
-            >
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+            </div>
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Enter password"
-                required
-            >
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+            </div>
 
-            <select name="role" required>
-                <option value="">Select Your Role</option>
-                <option value="Donor">Donor</option>
-                <option value="NGO">NGO</option>
-            </select>
+            <div class="form-group">
+                <label>Select Your Role</label>
 
-            <br><br>
+                <div class="role-options">
 
-            <button type="submit">Register</button>
+                    <div class="role-card">
+                        <input
+                            type="radio"
+                            id="donor"
+                            name="role"
+                            value="Donor"
+                            required
+                        >
+
+                        <label for="donor">
+                            <span>🍱</span>
+                            Donor
+                        </label>
+                    </div>
+
+                    <div class="role-card">
+                        <input
+                            type="radio"
+                            id="ngo"
+                            name="role"
+                            value="NGO"
+                            required
+                        >
+
+                        <label for="ngo">
+                            <span>🤝</span>
+                            NGO
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="submit" class="register-btn">
+                Create My Account →
+            </button>
 
         </form>
 
-        <p>Already have an account? <a href="/login">Login</a></p>
+        <div class="login-text">
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login Here</a>
+        </div>
 
-        <a href="/">Back to Home</a>
+        <div class="back-home">
+            <a href="{{ url_for('home') }}">← Back to Home</a>
+        </div>
 
     </div>
+
+</div>
 
 </body>
 </html>

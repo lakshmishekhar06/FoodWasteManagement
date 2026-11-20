@@ -334,7 +334,7 @@ def request_donation(donation_id):
     """, (donation_id,)).fetchone()
 
     if donation is None:
-        flash("This donation is no longer available.")
+        flash("This donation is no longer available.") 
 
     else:
         try:

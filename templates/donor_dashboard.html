@@ -3,254 +3,661 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donor Dashboard - FoodShare</title>
+    <title>Donor Dashboard | FoodShare</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f4;
-            margin: 0;
+        :root {
+            --blue: #315FB5;
+            --dark: #142B57;
+            --light: #EAF0FF;
+            --bg: #F4F6FC;
+            --text: #263956;
+            --muted: #8490A7;
         }
 
-        header {
-            background: #218838;
-            color: white;
-            text-align: center;
-            padding: 25px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: white;
+            padding: 17px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 18px #142B5710;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: var(--dark);
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .welcome {
+            color: #63718B;
+            font-size: 13px;
+        }
+
+        .logout {
+            background: #FFF0F0;
+            color: #D14343;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .logout:hover {
+            background: #FFE0E0;
+        }
+
+        /* MAIN */
 
         .container {
-            width: 85%;
-            margin: 30px auto;
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 5%;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
+        .page-heading {
             margin-bottom: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            color: #218838;
+        .page-heading h1 {
+            color: var(--dark);
+            font-size: 29px;
+        }
+
+        .page-heading p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 7px;
+        }
+
+        /* BANNER */
+
+        .banner {
+            background: linear-gradient(120deg, #142B57, #315FB5);
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+        }
+
+        .banner h2 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .banner p {
+            color: #DCE6FF;
+            font-size: 13px;
+        }
+
+        /* FLASH */
+
+        .flash {
+            background: #EAF0FF;
+            border: 1px solid #CAD8FA;
+            color: #244D99;
+            padding: 13px 17px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        /* SECTION */
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 35px 0 20px;
+        }
+
+        .section-title h2 {
+            color: var(--dark);
+            font-size: 21px;
+        }
+
+        .section-title span {
+            background: var(--light);
+            color: var(--blue);
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ADD DONATION FORM */
+
+        .form-card {
+            background: white;
+            border: 1px solid #E7EBF4;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 6px 20px #142B5708;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
         }
 
         label {
             display: block;
-            margin-top: 15px;
+            color: #344563;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
         input, textarea {
             width: 100%;
-            padding: 12px;
-            margin-top: 7px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #DCE3F0;
+            background: #F9FAFE;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+            transition: .3s;
         }
 
-        button, .logout-btn {
-            background: #218838;
+        input:focus, textarea:focus {
+            border-color: var(--blue);
+            background: white;
+            box-shadow: 0 0 0 3px #315FB51A;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(100deg, #315FB5, #142B57);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
+            padding: 13px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
+            transition: .3s;
         }
 
-        .reject-btn {
-            background: #c0392b;
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px #315FB540;
         }
 
-        .donation-item, .request-item {
-            border-left: 5px solid #218838;
-            background: #f9fff9;
-            padding: 18px;
-            margin: 15px 0;
-            border-radius: 5px;
+        /* DONATION CARDS */
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
         }
 
-        .message {
-            color: #218838;
-            font-weight: bold;
+        .donation-card {
+            background: white;
+            padding: 23px;
+            border-radius: 17px;
+            border: 1px solid #E7EBF4;
+            box-shadow: 0 6px 20px #142B5708;
+            transition: .3s;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px #142B5715;
+        }
+
+        .food-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            background: var(--light);
+            border-radius: 13px;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .donation-card h3 {
+            color: var(--dark);
+            font-size: 18px;
+            margin-bottom: 13px;
+        }
+
+        .detail {
+            color: #68758D;
+            font-size: 12px;
+            margin: 9px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .detail strong {
+            color: #344563;
         }
 
         .status {
-            font-weight: bold;
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--light);
+            color: var(--blue);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* REQUEST CARDS */
+
+        .request-card {
+            background: white;
+            padding: 23px;
+            border-radius: 17px;
+            border: 1px solid #E7EBF4;
+            box-shadow: 0 6px 20px #142B5708;
+        }
+
+        .request-card h3 {
+            color: var(--dark);
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .approve {
+            background: #315FB5;
+        }
+
+        .reject {
+            background: #D95353;
+        }
+
+        .action-btn:hover {
+            opacity: .85;
+        }
+
+        /* EMPTY STATE */
+
+        .empty {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            border: 1px dashed #C7D3E8;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            color: #8490A7;
+            font-size: 12px;
+        }
+
+        @media(max-width: 900px) {
+            .donation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .welcome {
+                display: none;
+            }
+
+            .container {
+                padding: 25px 4%;
+            }
+
+            .form-grid,
+            .donation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .banner {
+                padding: 23px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Welcome, {{ name }}!</h1>
-    <p>FoodShare - Donor Dashboard</p>
-    <p>Share Food, Spread Happiness!</p>
-</header>
+    <!-- NAVBAR -->
 
-<div class="container">
+    <nav class="navbar">
+        <div class="logo">🍱 Food<span>Share</span></div>
 
-    <!-- Flash Messages -->
-    {% with messages = get_flashed_messages() %}
-        {% for message in messages %}
-            <p class="message">{{ message }}</p>
-        {% endfor %}
-    {% endwith %}
+        <div class="nav-right">
+            <span class="welcome">Welcome, {{ name }}</span>
 
+            <a href="{{ url_for('logout') }}" class="logout">
+                Logout ↗
+            </a>
+        </div>
+    </nav>
 
-    <!-- Add Food Donation -->
-    <div class="card">
+    <main class="container">
 
-        <h2>Donate Surplus Food</h2>
+        <div class="page-heading">
+            <h1>Donor Dashboard</h1>
+            <p>Share surplus food and help people in need.</p>
+        </div>
 
-        <form action="{{ url_for('add_donation') }}" method="POST">
+        <!-- WELCOME BANNER -->
 
-            <label>Food Name:</label>
-            <input type="text" name="food_name"
-                   placeholder="Enter food name" required>
+        <div class="banner">
+            <h2>Welcome, {{ name }}! 💙</h2>
+            <p>
+                Your small contribution can make a big difference.
+                Add food donations and support your community.
+            </p>
+        </div>
 
-            <label>Quantity (Meals):</label>
-            <input type="number" name="quantity"
-                   min="1" placeholder="Enter quantity" required>
+        <!-- FLASH MESSAGES -->
 
-            <label>Pickup Location:</label>
-            <input type="text" name="location"
-                   placeholder="Enter pickup location" required>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-            <label>Pickup Date and Time:</label>
-            <input type="datetime-local" name="pickup_time" required>
+        <!-- ADD DONATION FORM -->
 
-            <label>Food Description:</label>
-            <textarea name="description"
-                      placeholder="Enter food description"></textarea>
+        <div class="section-title">
+            <h2>➕ Add New Food Donation</h2>
+            <span>Share Food</span>
+        </div>
 
-            <button type="submit">Submit Donation</button>
+        <div class="form-card">
 
-        </form>
+            <form method="POST" action="{{ url_for('add_donation') }}">
 
-    </div>
+                <div class="form-grid">
 
+                    <div class="form-group">
+                        <label>Food Name</label>
+                        <input
+                            type="text"
+                            name="food_name"
+                            placeholder="Example: Rice and Curry"
+                            required
+                        >
+                    </div>
 
-    <!-- My Donations -->
-    <div class="card">
+                    <div class="form-group">
+                        <label>Food Quantity</label>
+                        <input
+                            type="text"
+                            name="quantity"
+                            placeholder="Example: 20 plates"
+                            required
+                        >
+                    </div>
 
-        <h2>My Donations</h2>
+                    <div class="form-group">
+                        <label>Pickup Location</label>
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Enter pickup address"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pickup Time</label>
+                        <input
+                            type="text"
+                            name="pickup_time"
+                            placeholder="Example: 6 PM - 8 PM"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Food Description</label>
+                        <textarea
+                            name="description"
+                            placeholder="Describe the food and any important details..."
+                        ></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Submit Donation →
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- MY DONATIONS -->
+
+        <div class="section-title">
+            <h2>🍱 My Food Donations</h2>
+            <span>Donation Records</span>
+        </div>
 
         {% if donations %}
 
+        <div class="donation-grid">
+
             {% for donation in donations %}
 
-                <div class="donation-item">
+            <div class="donation-card">
 
-                    <h3>{{ donation.food_name }}</h3>
+                <div class="food-icon">🥗</div>
 
-                    <p><strong>Quantity:</strong>
-                        {{ donation.quantity }} meals
-                    </p>
+                <h3>{{ donation.food_name }}</h3>
 
-                    <p><strong>Location:</strong>
-                        {{ donation.location }}
-                    </p>
-
-                    <p><strong>Pickup Time:</strong>
-                        {{ donation.pickup_time }}
-                    </p>
-
-                    <p><strong>Description:</strong>
-                        {{ donation.description }}
-                    </p>
-
-                    <p class="status">
-                        <strong>Status:</strong> {{ donation.status }}
-                    </p>
-
+                <div class="detail">
+                    <strong>📦 Quantity:</strong>
+                    {{ donation.quantity }}
                 </div>
+
+                <div class="detail">
+                    <strong>📍 Location:</strong>
+                    {{ donation.location }}
+                </div>
+
+                <div class="detail">
+                    <strong>🕒 Pickup Time:</strong>
+                    {{ donation.pickup_time }}
+                </div>
+
+                <div class="detail">
+                    <strong>📝 Description:</strong>
+                    {{ donation.description }}
+                </div>
+
+                <span class="status">
+                    {{ donation.status }}
+                </span>
+
+            </div>
 
             {% endfor %}
 
+        </div>
+
         {% else %}
 
-            <p>No donations submitted yet.</p>
+        <div class="empty">
+            <div class="empty-icon">🍽️</div>
+            <h3>No Donations Yet</h3>
+            <p>Add your first food donation using the form above.</p>
+        </div>
 
         {% endif %}
 
-    </div>
+        <!-- NGO REQUESTS -->
 
-
-    <!-- NGO Requests -->
-    <div class="card">
-
-        <h2>NGO Food Requests</h2>
+        <div class="section-title">
+            <h2>🤝 NGO Donation Requests</h2>
+            <span>Manage Requests</span>
+        </div>
 
         {% if requests %}
 
+        <div class="donation-grid">
+
             {% for req in requests %}
 
-                <div class="request-item">
+            <div class="request-card">
 
-                    <h3>{{ req.food_name }}</h3>
+                <div class="food-icon">📩</div>
 
-                    <p><strong>NGO Name:</strong>
-                        {{ req.ngo_name }}
-                    </p>
+                <h3>{{ req.food_name }}</h3>
 
-                    <p><strong>Food Quantity:</strong>
-                        {{ req.quantity }} meals
-                    </p>
+                <div class="detail">
+                    <strong>📦 Quantity:</strong>
+                    {{ req.quantity }}
+                </div>
 
-                    <p><strong>Request Status:</strong>
-                        {{ req.request_status }}
-                    </p>
+                <div class="detail">
+                    <strong>📍 Location:</strong>
+                    {{ req.location }}
+                </div>
 
-                    {% if req.request_status == 'Pending' %}
+                <div class="detail">
+                    <strong>🕒 Pickup Time:</strong>
+                    {{ req.pickup_time }}
+                </div>
 
-                        <form action="{{ url_for('update_request',
-                                      request_id=req.request_id,
-                                      action='approve') }}"
-                              method="POST">
+                <div class="detail">
+                    <strong>📌 Status:</strong>
+                    {{ req.status }}
+                </div>
 
-                            <button type="submit">
-                                Approve Request
-                            </button>
+                <div class="actions">
 
-                        </form>
+                    <form method="POST"
+                          action="{{ url_for('update_request', request_id=req.request_id, action='approve') }}"
+                          style="flex:1;">
 
-                        <form action="{{ url_for('update_request',
-                                      request_id=req.request_id,
-                                      action='reject') }}"
-                              method="POST">
+                        <button type="submit" class="action-btn approve">
+                            ✓ Approve
+                        </button>
 
-                            <button type="submit" class="reject-btn">
-                                Reject Request
-                            </button>
+                    </form>
 
-                        </form>
+                    <form method="POST"
+                          action="{{ url_for('update_request', request_id=req.request_id, action='reject') }}"
+                          style="flex:1;">
 
-                    {% endif %}
+                        <button type="submit" class="action-btn reject">
+                            ✕ Reject
+                        </button>
+
+                    </form>
 
                 </div>
 
+            </div>
+
             {% endfor %}
+
+        </div>
 
         {% else %}
 
-            <p>No NGO requests received yet.</p>
+        <div class="empty">
+            <div class="empty-icon">📩</div>
+            <h3>No NGO Requests</h3>
+            <p>New donation requests will appear here.</p>
+        </div>
 
         {% endif %}
 
-    </div>
+    </main>
 
-
-    <a href="{{ url_for('logout') }}" class="logout-btn">
-        Logout
-    </a>
-
-</div>
+    <footer>
+        © 2026 FoodShare | Share Food, Spread Happiness 💙
+    </footer>
 
 </body>
 </html>

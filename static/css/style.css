@@ -1,116 +1,391 @@
+/* =================================
+   FOOD WASTE MANAGEMENT SYSTEM
+   MODERN WEBSITE DESIGN
+================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5fff5;
-    color: #333;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Navigation */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5faf5;
+    color: #26352a;
+    line-height: 1.6;
+}
+
+/* NAVIGATION BAR */
 
 header {
-    background-color: #ffffff;
-    padding: 20px 6%;
+    background: #ffffff;
+    padding: 18px 6%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px #ddd;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h2 {
-    color: #228b22;
+    color: #1296e3;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 nav a {
     text-decoration: none;
-    color: #333;
-    margin: 0 12px;
-    font-weight: bold;
+    color: #26352a;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
 nav a:hover {
-    color: #228b22;
+    color: #168044;
 }
 
-/* Buttons */
+/* BUTTONS */
 
-button {
-    padding: 12px 22px;
+button,
+.btn {
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     cursor: pointer;
+    font-family: inherit;
     font-size: 15px;
-    margin: 5px;
+    font-weight: 600;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .login-btn {
-    background-color: white;
-    border: 1px solid #228b22;
-    color: #228b22;
+    background: white;
+    color: #168044;
+    border: 2px solid #168044;
 }
 
 .register-btn,
 .donate-btn {
-    background-color: #228b22;
+    background: #168044;
     color: white;
 }
 
-button:hover {
-    opacity: 0.85;
+button:hover,
+.btn:hover {
+    background: #e9910e;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(22,128,68,0.2);
 }
 
-/* Home section */
+/* HOME / HERO SECTION */
 
 .hero {
-    text-align: center;
-    padding: 110px 20px;
-    background-color: #e8f5e9;
+    min-height: 570px;
+    padding: 90px 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.94),
+            rgba(255,255,255,0.45)
+        ),
+        url("../images/food.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .hero h1 {
-    color: #176b2c;
-    font-size: 42px;
+    color: #f74f16;
+    font-size: 48px;
+    font-weight: 800;
+    max-width: 700px;
+    line-height: 1.2;
     margin-bottom: 20px;
 }
 
 .hero h2 {
-    color: #388e3c;
+    color: #e82910;
+    font-size: 28px;
     margin-bottom: 15px;
 }
 
 .hero p {
-    font-size: 18px;
+    color: #ed0d0d;
+    font-size: 17px;
+    max-width: 650px;
     margin-bottom: 25px;
-    line-height: 1.6;
 }
 
-/* About section */
+/* ABOUT SECTION */
 
 .about {
+    background: white;
+    margin: 35px;
+    padding: 55px 35px;
     text-align: center;
-    padding: 60px 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
 }
 
 .about h2 {
-    color: #228b22;
+    color: #168044;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 
 .about p {
-    font-size: 17px;
-    line-height: 1.6;
+    color: #555;
+    font-size: 16px;
+    line-height: 1.9;
 }
 
-/* Footer */
+/* DASHBOARD */
+
+.dashboard-container {
+    padding: 35px;
+}
+
+.dashboard-container h1,
+.dashboard-container h2 {
+    color: #176b3a;
+    margin-bottom: 20px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.card,
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    transition: 0.3s;
+    border: 1px solid #edf3ed;
+}
+
+.card:hover,
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+}
+
+.card h3,
+.stat-card h3 {
+    color: #168044;
+    margin-bottom: 12px;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    background: #14532d;
+    color: white;
+    min-height: 100vh;
+    padding: 25px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 13px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #218c4b;
+}
+
+/* FORMS AND INPUTS */
+
+.form-container {
+    max-width: 500px;
+    margin: 45px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+.form-container h2 {
+    color: #168044;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px 15px;
+    margin: 10px 0;
+    border: 1px solid #d5e5d8;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #168044;
+    box-shadow: 0 0 6px rgba(22,128,68,0.2);
+}
+
+/* TABLE */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: #168044;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #e5eee5;
+    text-align: center;
+}
+
+tr:hover {
+    background: #f0f8f0;
+}
+
+/* FOOD IMAGES */
+
+img {
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+.food-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* STATUS */
+
+.status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* FOOTER */
 
 footer {
-    background-color: #176b2c;
+    background: #14532d;
     color: white;
     text-align: center;
-    padding: 22px;
-    margin-top: 30px;
+    padding: 25px;
+    margin-top: 40px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        min-height: 450px;
+        padding: 60px 25px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+    .about {
+        margin: 15px;
+        padding: 30px 20px;
+    }
+
+    .dashboard-container {
+        padding: 18px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        margin: 20px;
+        padding: 25px;
+    }
 }
